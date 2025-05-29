@@ -1,4 +1,5 @@
 const pool = require('../db');
+const { DatabaseInsertError, DataNotFoundError } = require('../exceptions/exception-types');
 
 async function insertUsers(records) {
   if (records.length === 0) return;
@@ -18,8 +19,7 @@ async function insertUsers(records) {
 
     await pool.query(queryText, values);
   } catch (e) {
-    console.log(e);
-    throw e;
+    throw new DatabaseInsertError(e.message);
   }
 }
 
@@ -37,8 +37,7 @@ async function getUsersAge() {
     const res = await pool.query(query);
     return res.rows[0];
   } catch (e) {
-    console.log(e);
-    return { total: 0, under_20: 0, age_20_40: 0, age_40_60: 0, over_60: 0 };
+    throw new DataNotFoundError(e.message);
   }
 }
 

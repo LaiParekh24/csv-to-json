@@ -1,4 +1,4 @@
-const { getUsersAge } = require("../dao/userDao");
+const { getUsersAge } = require("../dao/user-dao");
 
 async function calculateAgeDistribution() {
 
@@ -10,4 +10,5 @@ async function calculateAgeDistribution() {
   console.log(`40 to 60   ${(age_40_60 / total * 100).toFixed(2)}%`);
   console.log(`> 60       ${(over_60 / total * 100).toFixed(2)}%`);
 }
+
 module.exports = calculateAgeDistribution;
